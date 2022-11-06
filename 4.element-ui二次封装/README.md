@@ -1,0 +1,1 @@
+## label 的值与value的值相同则会被选定。 label绑定的值就是Radio 的 value。我这里选定label与日期绑定。也可以和地址绑定，仔细观察数据。可以发现每一行都是不一样的。然后给radio绑定了一个change事件。通过与这个事件绑定的方法使得label 的值与value的值一致。一致则被选中

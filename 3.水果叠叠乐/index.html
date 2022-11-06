@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>水果叠叠乐</title>
+    <script src="./js/jquery.min.js"></script>
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body>
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>
+    <ul id="card">
+      <li data-id="1" id="fruit-one">
+        <img src="./images/pineapple.svg" alt="" />
+      </li>
+      <li data-id="1" id="fruit-two">
+        <img src="./images/pineapple.svg" alt="" />
+      </li>
+      <li data-id="2" id="fruit-three">
+        <img src="./images/apple.svg" alt="" />
+      </li>
+      <li data-id="2" id="fruit-four">
+        <img src="./images/apple.svg" alt="" />
+      </li>
+      <li data-id="2" id="fruit-five">
+        <img src="./images/apple.svg" alt="" />
+      </li>
+      <li data-id="1" id="fruit-six">
+        <img src="./images/pineapple.svg" alt="" />
+      </li>
+      <li data-id="3" id="fruit-seven">
+        <img src="./images/avocado.svg" alt="" />
+      </li>
+      <li data-id="3" id="fruit-eight">
+        <img src="./images/avocado.svg" alt="" />
+      </li>
+      <li data-id="3" id="fruit-nine">
+        <img src="./images/avocado.svg" alt="" />
+      </li>
+      <li data-id="4" id="fruit-ten">
+        <img src="./images/grapes.svg" alt="" />
+      </li>
+      <li data-id="4" id="fruit-eleven">
+        <img src="./images/grapes.svg" alt="" />
+      </li>
+      <li data-id="4" id="fruit-twelve">
+        <img src="./images/grapes.svg" alt="" />
+      </li>
+    </ul>
+    <!-- 图片位置 -->
+    <!-- 卡槽位置 -->
+    <div class="fixed">
+      <div class="gradient-border" id="box"></div>
+    </div>
+    <script>
+      let arr=[];
+     
+      $("#card li").on("click", function (e) {
+        // TODO: 待补充代码
+        //console.log(arr.length);
+         //判断是否有7个，判断是否可消除，判断是否可增加
+         if(arr.length<7){
+        // 先让图片消失
+            $(this).hide()
+            // 将点击的li的自定义属性data-id加入到数组中
+            //console.log($(this).attr("data-id"));
+            arr.push($(this).attr("data-id"))
+            //加入到下方盒子中
+            console.log($(this).context);
+           //console.log($(this).html());
+           // $("#box").append($(this).context)不能使用这个，他会删除原有结点，必须使用clone
+           $("#box").append($(this).clone(false,true))
+           //追加进去默认li的style默认为none,但是这里有点重复了
+           $("#box").children("li").css("display","inline")
+            //$("#box").append($($(this).html()))
+            // 判断是否有可以消除的, 
+            let c1=0,c2=0,c3=0,c4=0;
+            $("#box li").each(function(){
+              if($(this).attr("data-id")==1){
+                c1++;
+                if(c1==3){
+                  arr.splice(0,3);
+                  c1=0;
+                  $("#box li").each(function(){
+                      if($(this).attr("data-id")==1){
+                        $(this).remove()
+                      }
+                  })
+                }
+              }else if($(this).attr("data-id")==2){
+                c2++;
+              
+                if(c2==3){
+                  c2=0;
+                   arr.splice(0,3);
+                  $("#box li").each(function(){
+                      if($(this).attr("data-id")==2){
+                        $(this).remove()
+                      }
+                  })
+                }
+              }else if($(this).attr("data-id")==3){
+                c3++;
+                
+                if(c3==3){
+                arr.splice(0,3);
+                  c3=0;
+                  $("#box li").each(function(){
+                      if($(this).attr("data-id")==3){
+                        $(this).remove()
+                      }
+                  })
+                }
+              }else if($(this).attr("data-id")==4){
+                c4++;
+               
+                if(c4==3){
+                 arr.splice(0,3);
+                  c4=0;
+                  $("#box li").each(function(){
+                      if($(this).attr("data-id")==4){
+                        $(this).remove()
+                      }
+                  })
+                }
+              }
+            })
+         }   
+      });
+    </script>
+  </body>
+</html>
+
